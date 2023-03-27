@@ -26,7 +26,7 @@ export const getReporte = async (req, res) => {
 			return res.status(404).json({
 				message: "El reporte no existe",
 			});
-		res.status(200).json(rows[0]);
+		res.status(200).json(rows);
 	} catch (error) {
 		return res.status(500).json({
 			message: "Algo no ha ocurrido bien",
@@ -60,13 +60,6 @@ export const postReportes = async ({ body }, res) => {
 
 /* Eliminar un reporte */
 export const deleteReporte = async (req, res) => {
-
-
-	/* coger el id reporte del token que cree abajo y pasarlo aca para que lo elimine de la sesion actual */
-
-	// const token = req.headers.authorization.split(' ')[1];
-    // const tokenverify = jwt.verify(token, process.env.SECRET_KEY || 'Stigmata14');
-    // const userId = tokenverify.id_usuarios
 
 	const headerToken = req.headers['authorization']
     const tokenReportes = headerToken.slice(7);

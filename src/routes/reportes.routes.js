@@ -28,10 +28,10 @@ router.patch('/user/reportes', putReporte);
 /* borrar un reporte */
 router.delete('/user/reportes', deleteReporte);
 
-/* Ver vehiculos de un usuario en especifico */
+/* Ver reporte de un usuario en especifico */
 router.get('/user/reportes', getUserReporte)
 
-/* crear vehiculo por id de usuario automatico */
+/* crear reporte por id de usuario automatico */
 router.post('/user/reportes', postReporte);
 
 export default router;
