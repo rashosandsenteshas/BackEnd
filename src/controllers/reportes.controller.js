@@ -24,7 +24,7 @@ export const getReporte = async (req, res) => {
 
 		if (rows.length <= 0)
 			return res.status(404).json({
-				message: "El usuario NO tiene vehiculos registrados.",
+				message: "El usuario NO tiene reportes generados.",
 			});
 		res.status(200).json(rows);
 	} catch (error) {
