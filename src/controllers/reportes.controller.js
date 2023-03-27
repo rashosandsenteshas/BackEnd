@@ -15,10 +15,11 @@ export const getReportes = async (req, res) => {
 
 /* obtener un reporte en especifico por id*/
 export const getReporte = async (req, res) => {
+	const {id_usuarios} = req.params
 	try {
 		const [rows] = await pool.query(
-			"SELECT * FROM reportes WHERE id_reportes = ?",
-			[req.params.id]
+			"SELECT * FROM reportes WHERE id_usuarios = ?",
+			[id_usuarios]
 		);
 
 		if (rows.length <= 0)
@@ -145,7 +146,7 @@ export const getUserReporte = async (req, res) => {
 
 		if (rows.length <= 0)
 			return res.status(404).json({
-				message: "El reporte no existe",
+				message: "Actualmente no tienes ningún reporte registrado. Si deseas visualizar uno, puedes realizarlo en la sección de vehículos y posteriormente acceder a esta sección para consultarlo.",
 			});
 		res.status(200).json(rows);
 	} catch (error) {

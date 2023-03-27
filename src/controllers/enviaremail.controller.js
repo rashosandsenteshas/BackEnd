@@ -4,10 +4,15 @@ import bcrypt from "bcryptjs"
 // import { createInterface } from "readline";
 
 
-const accountSid = 'ACa105432479f13f88453bc779d625c94a'; // Tu clave API de Twilio 
-const authToken = 'fa68a2b54e262b80e9613f6f5d2e48ad'; // Tu token de autenticación de Twilio
-const client = new twilio(accountSid, authToken);
+const accountSid = "ACa105432479f13f88453bc779d625c94a";
+const authToken = "98d5a3c8713700315f55983f01cd9167";
 const verifySid = "VAfebfa47bec9000348769a14b32d2b6f4";
+const client = new twilio(accountSid, authToken);
+
+// const readline = createInterface({
+//   input: process.stdin,
+//   output: process.stdout
+// });
 
 let numero
 let codigo
@@ -15,21 +20,20 @@ let codigo
 export const sendCode = async (req, res, next) => {
     numero = req.body.numero
     // const codigo = req.body.numero
-
+    console.log(numero);
     if (!numero) {
       return res.status(400).json({ message: "Numero de telefono requerido" });
     }
   
     client.verify.v2
     .services(verifySid)
-    .verifications.create({ to: `+57${numero}`, channel: "sms" })
+    .verifications.create({ to: `+57${numero}`, channel: "sms", friendlyName: 'es: ' })
     res.status(200).json({message: "Codigo enviado correctamente"})
-
 }
 
 export const verifyCode = async (req, res, next) => {
     codigo = req.body.codigo;
-    
+      console.log(numero);
     if (!codigo) {
         return res.status(400).json({ message: "Código de confirmación requeridos" });
     }
