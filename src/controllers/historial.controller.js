@@ -17,7 +17,7 @@ export const getHistorial = async (req, res, next) => {
 }
 
 
-export const getHistorialPorFecha = async (req, res, next) => {
+export const getHistorialPorFechas = async (req, res, next) => {
     const { fecha_ingreso, fecha_salida } = req.body;
   
     try {
@@ -32,9 +32,6 @@ export const getHistorialPorFecha = async (req, res, next) => {
         [fecha_ingreso, fecha_salida]
       );
       res.status(200).json(result);
-    
-      if(result <= [0]) return res.status(400).json({message: "NO historial de las fechas seleccionadas"})
-
     } catch (error) {
       res.status(400).json({
         message: "algo va mal, no se pudo obtener el historial",

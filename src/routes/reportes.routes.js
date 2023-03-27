@@ -8,7 +8,7 @@ import {
     putReporte,
     deleteReporte,
     postReportes,
-    getUserReporteId
+    getUserReporte
 } from '../controllers/reportes.controller.js';
 
 const router = Router();
@@ -17,7 +17,7 @@ const router = Router();
 router.get('/reportes', getReportes);
 
 /* obtener un reporte en especifico */
-router.get('/reportes/:id_usuarios', getReporte);
+router.get('/reportes/:id', getReporte);
 
 /* crear un reporte */
 router.post('/reportes', postReportes);
@@ -28,10 +28,10 @@ router.patch('/user/reportes', putReporte);
 /* borrar un reporte */
 router.delete('/user/reportes', deleteReporte);
 
-/* Ver reporte de un usuario en especifico */
-router.get('/user/reportes', getUserReporteId)
+/* Ver vehiculos de un usuario en especifico */
+router.get('/user/reportes', getUserReporte)
 
-/* crear reporte por id de usuario automatico */
+/* crear vehiculo por id de usuario automatico */
 router.post('/user/reportes', postReporte);
 
 export default router;

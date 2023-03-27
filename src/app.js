@@ -14,7 +14,6 @@ import facturaRoutes from './routes/factura.routes.js';
 import authRoutes from './routes/auth.routes.js';
 import historialRoutes from './routes/historial.routes.js';
 import enviaremailRoutes from './routes/enviaremail.routes.js';
-import indexRoutes from './routes/index.routes.js';
 
 
 /* module initialization */
@@ -28,8 +27,6 @@ app.use(bodyParser.json());
 app.use(express.json());
 
 // Endpoints
-
-app.use('/', indexRoutes);
 app.use('/api', usuariosRoutes);
 app.use('/api', vehiculosRoutes);
 app.use('/api', reportesRoutes);

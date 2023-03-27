@@ -15,16 +15,15 @@ export const getReportes = async (req, res) => {
 
 /* obtener un reporte en especifico por id*/
 export const getReporte = async (req, res) => {
-	const {id_usuarios} = req.params
 	try {
 		const [rows] = await pool.query(
-			"SELECT * FROM reportes WHERE id_usuarios = ?",
-			[id_usuarios]
+			"SELECT * FROM reportes WHERE id_reportes = ?",
+			[req.params.id]
 		);
 
 		if (rows.length <= 0)
 			return res.status(404).json({
-				message: "El usuario no cuenta con reportes existentes",
+				message: "El reporte no existe",
 			});
 		res.status(200).json(rows[0]);
 	} catch (error) {
@@ -127,7 +126,7 @@ export const putReporte = async (req, res) => {
 };
 
 /* Ver el o los reporte por id de usuario */
-export const getUserReporteId = async (req, res) => {
+export const getUserReporte = async (req, res) => {
 
 /* 	const token = req.headers.authorization.split(' ')[1];
     const tokenverify = jwt.verify(token, process.env.SECRET_KEY || 'Stigmata14');
@@ -146,7 +145,7 @@ export const getUserReporteId = async (req, res) => {
 
 		if (rows.length <= 0)
 			return res.status(404).json({
-				message: "NO tienes reportes creados, Crea uno en la informacion de tus vehiculos y podras visualizarlos aqui.",
+				message: "El reporte no existe",
 			});
 		res.status(200).json(rows);
 	} catch (error) {
