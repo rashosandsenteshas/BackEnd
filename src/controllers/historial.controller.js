@@ -18,25 +18,30 @@ export const getHistorial = async (req, res, next) => {
 
 
 export const getHistorialPorFechas = async (req, res, next) => {
-    const { fecha_ingreso, fecha_salida } = req.body;
-  
-    try {
-      const [result] = await pool.execute(
-        `
-        SELECT u.nombre, v.placa, e.fecha_ingreso, e.fecha_salida 
-        FROM usuarios u 
-        JOIN vehiculos v ON u.id_usuarios = v.id_usuarios 
-        JOIN entrada_salida e ON v.id_vehiculo = e.id_vehiculo
-        WHERE e.fecha_ingreso = ? AND e.fecha_salida = ?;
-        `,
-        [fecha_ingreso, fecha_salida]
-      );
+  const { fecha_ingreso, fecha_salida } = req.body;
 
-      if(result < [0]) return res.status(400).json({message: `NO existen registros de entrada y salida entre las fechas ${fecha_ingreso} y ${fecha_salida}`})
-      res.status(200).json(result);
-    } catch (error) {
-      res.status(400).json({
-        message: "algo va mal, no se pudo obtener el historial",
-      });
+  try {
+    const [result] = await pool.execute(
+      `
+      SELECT u.nombre, v.placa, e.fecha_ingreso, e.fecha_salida 
+      FROM usuarios u 
+      JOIN vehiculos v ON u.id_usuarios = v.id_usuarios 
+      JOIN entrada_salida e ON v.id_vehiculo = e.id_vehiculo
+      WHERE e.fecha_ingreso = ? AND e.fecha_salida = ?;
+      `,
+      [fecha_ingreso, fecha_salida]
+    );
+
+    if (result.length === 0) {
+      return res
+        .status(400)
+        .json({ message: `No existen registros de entrada y salida entre las fechas ${fecha_ingreso} y ${fecha_salida}` });
     }
-  };
+
+    res.status(200).json(result);
+  } catch (error) {
+    res.status(400).json({
+      message: "Algo va mal, no se pudo obtener el historial",
+    });
+  }
+};
