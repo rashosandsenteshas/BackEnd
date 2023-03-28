@@ -27,7 +27,8 @@ export const getHistorialPorFechas = async (req, res, next) => {
       FROM usuarios u 
       JOIN vehiculos v ON u.id_usuarios = v.id_usuarios 
       JOIN entrada_salida e ON v.id_vehiculo = e.id_vehiculo
-      WHERE e.fecha_ingreso = ? AND e.fecha_salida = ?;
+      WHERE e.fecha_ingreso >= ? AND e.fecha_salida <= ?;
+      
       `,
       [fecha_ingreso, fecha_salida]
     );
