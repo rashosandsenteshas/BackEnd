@@ -7,6 +7,6 @@ const router = new Router();
 // Add routes
 
 router.get('/user/historial', getHistorial);
-router.get('/user/historial-fecha', getHistorialPorFechas );
+router.post('/user/historial-fecha', getHistorialPorFechas );
 
 export default router
