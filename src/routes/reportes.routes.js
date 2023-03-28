@@ -17,7 +17,7 @@ const router = Router();
 router.get('/reportes', getReportes);
 
 /* obtener un reporte en especifico */
-router.get('/:id_usuarios/reportes/', getReporte);
+router.get('/user/:id_usuarios/reportes/', getReporte);
 
 /* crear un reporte */
 router.post('/reportes', postReportes);
