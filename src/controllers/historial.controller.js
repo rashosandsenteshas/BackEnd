@@ -31,6 +31,8 @@ export const getHistorialPorFechas = async (req, res, next) => {
         `,
         [fecha_ingreso, fecha_salida]
       );
+
+      if(result <= [0]) return res.status(400).json({message: `NO existen registros de entrada y salida entre las fechas ${fecha_ingreso} y ${fecha_salida}`})
       res.status(200).json(result);
     } catch (error) {
       res.status(400).json({
